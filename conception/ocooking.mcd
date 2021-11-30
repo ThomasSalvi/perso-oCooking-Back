@@ -1,0 +1,17 @@
+Ingrédient: id_ingrédient, nom, description, saison
+compose, 1N Recette, 0N Ingrédient: quantité, unité
+propose, 11 Recette, 0N Contributeur
+Contributeur: id_contributeur, prénom, nom, email, mot_de_passe, pseudo, biographie, avatar
+écrit, 11 Contributeur, 0N Commentaire
+
+:
+valide, 11 Recette, 0N Cuisinier
+Recette: id_recette, nom, statut, étapes, résumé, image, difficulté, temps_de_préparation, temps_de_cuisson, nombre_personne, coût_par_personne
+commente, 11 Commentaire, 0N Recette
+Commentaire: id_commentaire, message, note, statut, note_commentaire
+
+:
+Cuisinier: id_cuisinier, prénom, nom, email, mot_de_passe, pseudo, biographie, avatar, url_site
+rédige, 11 Recette, 0N Cuisinier
+est, 1N Recette, 0N Type
+Type: id_type, nom, description

@@ -1,0 +1,27 @@
+# Fichier de configuration
+wp-config.php
+
+# Dossier des dépendances
+vendor
+
+# Dossier d'installation de WordPress
+wp
+
+# Dossier des fichiers de traduction
+/content/languages
+
+# Dossier des fichiers de mise à jour
+/content/upgrade
+
+# Dossier des médias
+/content/uploads
+
+# Plugins
+/content/plugins/*/
+!/content/plugins/ocooking
+
+# Themes
+/content/themes/*/
+
+# Query Monitor database dropin
+/content/db.php

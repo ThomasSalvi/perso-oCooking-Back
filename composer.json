@@ -1,0 +1,67 @@
+{
+    "repositories":[
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "johnpbloch/wordpress": "^5.7",
+        "wpackagist-theme/twentytwentyone":"^1.3",
+        "wpackagist-plugin/jwt-authentication-for-wp-rest-api":"1.2.6",
+        "wp-cli/wp-cli": "^2.4",
+        "wp-cli/core-command": "^2.0",
+        "wp-cli/language-command": "^2.0",
+        "wp-cli/config-command": "^2.0",
+        "wp-cli/extension-command": "^2.0",
+        "wp-cli/rewrite-command": "^2.0"
+    },
+    "require-dev": {
+        "wpackagist-plugin/query-monitor": "^3.6",
+        "wpackagist-plugin/fakerpress": "^0.5.1"
+    },
+    "extra": {
+        "wordpress-install-dir": "wp",
+        "installer-paths": {
+            "content/themes/{$name}": ["type:wordpress-theme"],
+            "content/plugins/{$name}": ["type:wordpress-plugin"]
+
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "cp -n wp-config-sample.php wp-config.php"
+        ],
+        "wordpress-activate-debug": "./vendor/bin/wp config set WP_DEBUG true --raw",
+        "wordpress-activate-development-environment": "./vendor/bin/wp config set ENVIRONMENT development",
+        "wordpress-activate-staging-environment": "./vendor/bin/wp config set ENVIRONMENT staging",
+        "wordpress-activate-theme": "./vendor/bin/wp theme activate twentytwentyone",
+        "wordpress-activate-plugins": "./vendor/bin/wp plugin activate --all",
+        "wordpress-download-translations": [
+            "./vendor/bin/wp language core install fr_FR",
+            "./vendor/bin/wp language plugin install fr_FR --all",
+            "./vendor/bin/wp language theme install fr_FR --all",
+            "./vendor/bin/wp language core activate fr_FR"
+        ],
+        "wordpress-shuffle-salts": "./vendor/bin/wp config shuffle-salts",
+        "wordpress-set-rewrite-structure": "./vendor/bin/wp rewrite structure '/%postname%/'",
+        "wordpress-install": [
+            "./vendor/bin/wp core install --prompt",
+            "@wordpress-shuffle-salts",
+            "@wordpress-activate-plugins",
+            "@wordpress-activate-theme",
+            "@wordpress-download-translations",
+            "@wordpress-set-rewrite-structure"
+        ],
+        "wordpress-install-development": [
+            "@wordpress-install",
+            "@wordpress-activate-debug",
+            "@wordpress-activate-development-environment"
+        ],
+        "wordpress-install-staging": [
+            "@wordpress-install",
+            "@wordpress-activate-debug",
+            "@wordpress-activate-development-environment"
+        ]
+    }
+}

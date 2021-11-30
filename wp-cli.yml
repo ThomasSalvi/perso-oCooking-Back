@@ -1,0 +1,4 @@
+disabled_commands:
+  - db drop
+  - plugin install
+  - theme install
